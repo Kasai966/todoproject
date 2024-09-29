@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todo.apps.TodoConfig',#todoアプリの組み込み
+    'calendar_app.apps.CalendarAppConfig',#calendarアプリの組み込み
 ]
 
 MIDDLEWARE = [
