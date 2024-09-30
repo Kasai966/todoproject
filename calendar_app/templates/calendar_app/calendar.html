@@ -10,6 +10,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
+        var events = {{ events|safe}};
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             headerToolbar: {
@@ -17,7 +18,7 @@
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            events: [] // イベントデータをここに追加
+            events: events // イベントデータをここに追加
         });
         calendar.render();
     });
