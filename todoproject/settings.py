@@ -16,6 +16,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+#カスタムユーザーモデルの設定
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -27,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'todo.apps.TodoConfig',#todoアプリの組み込み
     'calendar_app.apps.CalendarAppConfig',#calendarアプリの組み込み
+    'users.apps.UsersConfig',#usersアプリの組み込み
 ]
 
 MIDDLEWARE = [
