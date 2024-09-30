@@ -1,7 +1,8 @@
 from django.urls import path, include
-from todo.views import TodoList, TodoDetail, TodoCreate, TodoDelete, TodoUpdate
+from todo.views import TodoMain, TodoList, TodoDetail, TodoCreate, TodoDelete, TodoUpdate
 
 urlpatterns = [
+    path('index/', TodoMain.as_view(), name='main'),
     path('list/', TodoList.as_view(), name='list'),
     path('detail/<int:pk>', TodoDetail.as_view(), name='detail'),
     path('create/', TodoCreate.as_view(), name='create'),

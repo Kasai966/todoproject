@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">StudyApp</h1>
+        <p class="lead">毎日継続して勉強を続けましょう</p> 
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- リストをインクルード -->
+        {% include 'todo/list.html' %}
+    </div>
+{% endblock content %}
