@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import TodoModel
+from users.models import LoginRecord
 from django.urls import reverse_lazy
 
 #ToDoのメイン画面
@@ -9,6 +10,12 @@ class TodoMain(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = TodoModel.objects.all()  # object_listをコンテキストに追加
+        
+        #ログイン履歴をカレンダーに表示
+        login_records = LoginRecord.objects.filter(user=self.request.user)
+        events = [{'title':'ログイン', 'start':record.login_date.strftime('%Y-%m-%d'),
+               'color':'green'} for record in login_records]
+        context['events'] = events
         return context
 
 #ToDoの一覧表示機能
