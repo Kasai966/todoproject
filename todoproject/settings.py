@@ -16,10 +16,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-#カスタムユーザーモデルの設定
-AUTH_USER_MODEL = 'users.CustomUser'
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -33,6 +29,8 @@ INSTALLED_APPS = [
     'calendar_app.apps.CalendarAppConfig',#calendarアプリの組み込み
     'users.apps.UsersConfig',#usersアプリの組み込み
 ]
+#カスタムユーザーモデルの設定
+AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
