@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import TodoModel
 from users.models import LoginRecord
@@ -46,3 +47,10 @@ class TodoUpdate(UpdateView):
     model = TodoModel
     fields = ('title', 'contents', 'priority', 'duedate')
     success_url = reverse_lazy('main')
+
+#ToDoの完了機能
+def complete_task(request, task_id):
+    task = get_object_or_404(TodoModel, id=task_id)
+    task.is_completed = True
+    task.save()
+    return JsonResponse({'status':'success'})
