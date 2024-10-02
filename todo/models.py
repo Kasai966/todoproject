@@ -11,6 +11,7 @@ class TodoModel(models.Model):
         null = True
     )
     duedate = models.DateField()
+    is_completed = models.BooleanField(default=False) #完了フラグ
 
 #管理画面のobjectをタイトルと一致して表示
     def __str__(self):
