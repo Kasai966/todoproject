@@ -4,13 +4,33 @@
     <div class="container">
     <a href="{% url 'create' %}" class="btn btn-secondary mb-2" tabindex="-1" role="button" aria-disabled="true">新規作成画面へ</a>
     {% for item in object_list %}
-    <div class="alert alert-{{ item.priority }}" role="alert">
+    <div id="task-{{ item.pk }}" class="alert alert-{{ item.priority }}" role="alert">
         <p>{{ item.title }} 期日{{ item.duedate | date:"o/n/j" }}</p>
         <a href="{% url 'update' item.pk %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">編集画面へ</a>
         <a href="{% url 'delete' item.pk %}" class="btn btn-success" tabindex="-1" role="button" aria-disabled="true">削除画面へ</a>
         <a href="{% url 'detail' item.pk %}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">詳細画面へ</a>
-        <a href="{% url 'index' %}" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true">タスク完了</a>
+        <button onclick="complete_task({{ item.pk }})" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true">タスク完了</button>
     </div>
     {% endfor %}
     </div>
+
+    <script>
+        // タスク完了の関数を定義
+        function complete_task(taskId){
+            fetch(`/tasks/complete/${taskId}/`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-CSRFToken':'{{ csrf_token }}'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById(`task-${taskId}`).style.display = 'none';
+                }
+            });
+        }
+    </script>
 {% endblock content %}
