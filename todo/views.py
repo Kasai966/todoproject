@@ -13,9 +13,8 @@ class TodoMain(TemplateView):
         
         #ログイン履歴をカレンダーに表示
         login_records = LoginRecord.objects.filter(user=self.request.user)
-        events = [{'title':'ログイン', 'start':record.login_date.strftime('%Y-%m-%d'),
-               'color':'green'} for record in login_records]
-        context['events'] = events
+        highlighted_dates = [record.login_date.strftime('%Y-%m-%d') for record in login_records]
+        context['highlighted_dates'] = highlighted_dates
         return context
 
 #ToDoの一覧表示機能

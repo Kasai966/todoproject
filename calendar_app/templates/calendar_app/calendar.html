@@ -7,10 +7,18 @@
         <div id="calendar" style="max-width: 500px; margin: 0 auto;"></div>
     </div>
 
+<!-- ハイライト用のカラーを指定-->
+<style>
+    .highlighted-date{
+        background-color:rgb(0, 168, 177);
+    }
+</style>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-        var events = {{ events|safe}};
+        var highlightedDates = {{ highlighted_dates|safe}};
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             headerToolbar: {
@@ -18,7 +26,17 @@
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            events: events // イベントデータをここに追加
+
+            //日付のハイライトを設定
+            dayCellDidMount:function(info){
+                var date = info.date;
+                date.setHours(date.getHours() + 9); //日本に合わせて9時間オフセット調整
+                var dateStr = date.toISOString().split('T')[0];
+
+                if (highlightedDates.includes(dateStr)){
+                    info.el.classList.add('highlighted-date');
+                }
+            }
         });
         calendar.render();
     });
