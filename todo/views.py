@@ -10,7 +10,7 @@ class TodoMain(TemplateView):
     template_name = 'index.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['object_list'] = TodoModel.objects.all()  # object_listをコンテキストに追加
+        context['object_list'] = TodoModel.objects.filter(is_completed=False)  # 完了タスク以外のobject_listをコンテキストに追加
         
         #ログイン履歴をカレンダーに表示
         login_records = LoginRecord.objects.filter(user=self.request.user)
@@ -33,20 +33,20 @@ class TodoCreate(CreateView):
     template_name = 'todo/create.html'
     model = TodoModel
     fields = ('title', 'contents', 'priority', 'duedate')
-    success_url = reverse_lazy('main')
+    success_url = reverse_lazy('index')
 
 #ToDoの削除機能
 class TodoDelete(DeleteView):
     template_name = 'todo/delete.html'
     model = TodoModel
-    success_url = reverse_lazy('main')
+    success_url = reverse_lazy('index')
 
 #ToDoの編集機能
 class TodoUpdate(UpdateView):
     template_name = 'todo/update.html'
     model = TodoModel
     fields = ('title', 'contents', 'priority', 'duedate')
-    success_url = reverse_lazy('main')
+    success_url = reverse_lazy('index')
 
 #ToDoの完了機能
 def complete_task(request, task_id):
