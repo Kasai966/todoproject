@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">完了済みタスク一覧</h1>
+        <p class="lead">この調子で頑張りましょう！</p> 
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <a href="{% url 'index' %}" class="btn btn-secondary mb-2" tabindex="-1" role="button" aria-disabled="true">メイン画面へ戻る</a>
+    {% for item in object_list %}
+    <div id="task-{{ item.pk }}" class="alert alert-{{ item.priority }}" role="alert">
+        <p>{{ item.title }} 期日{{ item.duedate | date:"o/n/j" }}</p>
+    </div>
+    {% endfor %}
+    </div>
+{% endblock content %}

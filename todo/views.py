@@ -23,6 +23,14 @@ class TodoList(ListView):
     template_name = 'todo/list.html'
     model = TodoModel
 
+#完了タスクの一覧表示機能
+class CompletedTasks(ListView):
+    template_name = 'todo/completed_tasks.html'
+    model = TodoModel
+    #完了済みのタスクを取得
+    def get_queryset(self):
+        return TodoModel.objects.filter(is_completed=True)
+
 #ToDoの詳細表示機能
 class TodoDetail(DetailView):
     template_name = 'todo/detail.html'
