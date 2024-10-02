@@ -11,6 +11,7 @@
 
 {% block content %}
     <div class="container">
+        <a href="{% url 'completed_tasks' %}" class="btn btn-secondary mb-2" tabindex="-1" role="button" aria-disabled="true">完了済みタスク一覧へ</a>
         <!-- リストをインクルード -->
         {% include 'todo/list.html' %}
         <!-- カレンダーをインクルード　-->
