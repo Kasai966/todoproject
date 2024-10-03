@@ -10,8 +10,14 @@ class TodoMain(TemplateView):
     template_name = 'index.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['object_list'] = TodoModel.objects.filter(is_completed=False)  # 完了タスク以外のobject_listをコンテキストに追加
+
+        #未完了タスクをコンテキストに追加
+        context['object_list'] = TodoModel.objects.filter(is_completed=False)
         
+        #完了タスクの数をコンテキストに追加
+        completed_tasks_count = TodoModel.objects.filter(is_completed=True).count()
+        context['completed_tasks_count'] = completed_tasks_count
+
         #ログイン履歴をカレンダーに表示
         login_records = LoginRecord.objects.filter(user=self.request.user)
         highlighted_dates = [record.login_date.strftime('%Y-%m-%d') for record in login_records]
