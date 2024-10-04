@@ -32,6 +32,10 @@ INSTALLED_APPS = [
 #カスタムユーザーモデルの設定
 AUTH_USER_MODEL = 'users.CustomUser'
 
+#認証に関する設定
+LOGIN_URL = 'login' #ログインページのURLパターン名
+LOGIN_REDIRECT_URL = 'index' #ログイン成功後にリダイレクトするURL
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

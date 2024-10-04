@@ -1,8 +1,11 @@
 from django.urls import path, include
-from todo.views import TodoMain, TodoList, TodoDetail, TodoCreate, TodoDelete, TodoUpdate, CompletedTasks
+from todo.views import SignUp, TodoMain, TodoList, TodoDetail, TodoCreate, TodoDelete, TodoUpdate, CompletedTasks
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('signup/', SignUp.as_view(), name='signup'),
+    path('login/', auth_views.LoginView.as_view(template_name='todo/login.html'), name='login'),
     path('index/', TodoMain.as_view(), name='index'),
     path('list/', TodoList.as_view(), name='list'),
     path('detail/<int:pk>', TodoDetail.as_view(), name='detail'),

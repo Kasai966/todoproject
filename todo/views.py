@@ -1,9 +1,16 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, DeleteView, UpdateView
+from .forms import CustomUserCreationForm
 from .models import TodoModel
 from users.models import LoginRecord
 from django.urls import reverse_lazy
+
+#サインアップ画面
+class SignUp(CreateView):
+    template_name = 'todo/signup.html'
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
 
 #ToDoのメイン画面
 class TodoMain(TemplateView):
