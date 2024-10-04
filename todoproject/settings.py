@@ -35,6 +35,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 #認証に関する設定
 LOGIN_URL = 'login' #ログインページのURLパターン名
 LOGIN_REDIRECT_URL = 'index' #ログイン成功後にリダイレクトするURL
+LOGOUT_REDIRECT_URL = 'login' #ログアウト後にリダイレクトするURL
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

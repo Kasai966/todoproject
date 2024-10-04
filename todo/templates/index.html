@@ -18,5 +18,10 @@
         {% include 'todo/list.html' %}
         <!-- カレンダーをインクルード　-->
         {% include 'calendar_app/calendar.html' %}
+        <!-- ログアウト　-->
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">ログアウト</button>
+        </form>
     </div>
 {% endblock content %}
